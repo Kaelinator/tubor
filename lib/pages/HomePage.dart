@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/TutorList.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             offstage: _currentIndex != 0,
             child: TickerMode(
               enabled: _currentIndex == 0,
-              child: const Text('Projects')
+              child: TutorList()
             )
           ),
           Offstage(
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.explore),
+            icon: const Icon(Icons.search),
             title: const Text('Find'),
           ),
           BottomNavigationBarItem(
