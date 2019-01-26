@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "610148461431",
+    "firebase_url": "https://tubor-4a48a.firebaseio.com",
+    "project_id": "tubor-4a48a",
+    "storage_bucket": "tubor-4a48a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610148461431:android:0b826e531628aed2",
+        "android_client_info": {
+          "package_name": "com.example.tubor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610148461431-145n3j8ecbm58qacabjmf749kl6kp5tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwN2F4VybCbFIwea7Re-_zxTzNz419fUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
