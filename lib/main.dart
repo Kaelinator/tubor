@@ -26,24 +26,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    // Firestore.instance.collection('testing')
-
-    setState(() {
-      _counter++;
+  void _increment(DocumentSnapshot docSnap) {
+    Firestore.instance.runTransaction((Transaction tx) async {
+      if (docSnap.exists) {
+        await tx.update(docSnap.reference, <String, dynamic>{'count': docSnap['count'] + 1});
+      }
     });
   }
 
-  Widget renderTiles(List<DocumentSnapshot> documents) {
-    print('collection: ${Firestore.instance.collection('testing')}');
+  Widget _renderTiles(List<DocumentSnapshot> documents) {
     print('These are the docs: $documents');
+    
     return ListView(
       children: documents.map((DocumentSnapshot document) {
         return ListTile(
           title: Text(document['name']),
           subtitle: Text('${document['count']}'),
+          onTap: () => _increment(document),
         );
       }).toList(),
     );
@@ -62,15 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Text('Loading...');
-            default: return renderTiles(snapshot.data.documents);
+            default: return _renderTiles(snapshot.data.documents);
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
