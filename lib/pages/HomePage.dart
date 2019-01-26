@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             title: const Text('Upcoming'),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.fast_rewind),
+            icon: const Icon(Icons.history),
             title: const Text('History'),
           ),
         ],
