@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       children: documents.map((DocumentSnapshot document) {
         return ListTile(
-          title: Text('Title!'),//Text(document['name']),
-          subtitle: Text(document['count']),
+          title: Text(document['name']),
+          subtitle: Text('${document['count']}'),
         );
       }).toList(),
     );
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('testiasdfasdfngg').snapshots(),
+        stream: Firestore.instance.collection('testing').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Error: ${snapshot.error}');
           switch (snapshot.connectionState) {
