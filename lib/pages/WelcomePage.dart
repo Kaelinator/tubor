@@ -32,13 +32,13 @@ class _WelcomePageState extends State<WelcomePage> {
         });
       });
 
-    // FirebaseAuth.instance
-    //   .signInWithEmailAndPassword(
-    //     email: 'kirkkael@gmail.com',
-    //     password: 'ThisIsMahPassword'
-    //   );
+    FirebaseAuth.instance
+      .signInWithEmailAndPassword(
+        email: 'kirkkael@gmail.com',
+        password: 'ThisIsMahPassword'
+      );
 
-    FirebaseAuth.instance.signOut();
+    //FirebaseAuth.instance.signOut();
 
     super.initState();
   }
@@ -47,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: (_loggedIn) ? LoginPage() : HomePage(title: 'hi')
+      child: (_loggedIn) ? LoginPage() : HomePage()
     );
   }
 }

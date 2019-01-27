@@ -59,7 +59,7 @@ class Create extends State<CreateAccount> {
                             child: new Text("Create Account"),
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(title: 'hi')));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                           },
                         )
                       ],
