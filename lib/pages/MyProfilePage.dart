@@ -107,6 +107,7 @@ class MyProfilePage extends StatelessWidget {
                           'start': s.startTime.format(context),
                           'end': s.endTime.format(context),
                           'cost': s.cost,
+                          'size': 1,
                           'subject': s.subject,
                           'enrolledStudents': [],
                           'tutorId': snapshot.documentID,
