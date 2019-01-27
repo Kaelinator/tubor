@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
->>>>>>> 804f094bba0fc64db4bcb1d330394eb20e262a68
 import './CreateAccount.dart';
 
 class LoginPage extends StatefulWidget {
