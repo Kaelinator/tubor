@@ -18,21 +18,23 @@ return Material(
        image: AssetImage("assets/kseLogo.png"),
        fit: BoxFit.cover,
      ),
-     Column(
-       children: <Widget>[
-         
-         TextFormField(
-           decoration: InputDecoration(labelText: "Enter Email", fillColor: Colors.white),
-           keyboardType: TextInputType.emailAddress,
-         ),
-         TextFormField(
-           decoration: InputDecoration(labelText: "Enter Password",),
-           obscureText: true,
-           keyboardType: TextInputType.text ,
-      
+     Container(
+       padding: EdgeInsets.all(40),
+       child: Form(
+         child: Column(
+           children: <Widget>[
+             TextFormField(
+               keyboardType: TextInputType.emailAddress,
+               decoration: InputDecoration(labelText: "Enter Email", fillColor: Colors.white),
+             ),
+             TextFormField(
+               keyboardType: TextInputType.text,
+               obscureText: true,
+               decoration: InputDecoration(labelText: "Enter Password"),
+             )
+           ],
          )
-      
-       ],
+       )
      )
 
    ],)
