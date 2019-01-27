@@ -14,9 +14,15 @@ return Material(
  child: Scaffold(
    backgroundColor: Colors.blueGrey,
    body: Stack(fit: StackFit.expand, children: <Widget>[
+
      Image(
        image: AssetImage("assets/kseLogo.png"),
        fit: BoxFit.cover,
+     ),
+     Column(
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: <Widget>[
+       ],
      ),
      Container(
        padding: EdgeInsets.all(40),
