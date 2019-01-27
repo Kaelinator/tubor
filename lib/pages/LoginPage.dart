@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class LoginState extends State<LoginPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
-
+  String errorMsg = "you suck";
   final _formKey = GlobalKey<FormState>();
 
   void _login() {
@@ -43,14 +43,23 @@ class LoginState extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(40),
+                  padding: EdgeInsets.only(left: 40,right: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Login Failed: $errorMsg",style: TextStyle(color: Colors.redAccent, fontSize: 20, ),),
+                      ],
+                      )
+                ),
+                Container(
+                    padding: EdgeInsets.only(left:40,right:40,bottom:40),
                     child: Form(
                         child: Column(
                       children: <Widget>[
                         TextFormField(
                           controller: email,
                           keyboardType: TextInputType.emailAddress,
-                          validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
+                          validator: (val) => (val.isEmpty) ? 'Please enter your email' : null,
                           decoration: InputDecoration(
                               labelText: "Email",
                               fillColor: Colors.white,
@@ -60,26 +69,31 @@ class LoginState extends State<LoginPage> {
                           controller: pass,
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
+                          validator: (val) => (val.isEmpty) ? 'Please enter your password' : null,
                           decoration:
                               InputDecoration(labelText: "Password"),
                         ),
-                        Row(children: <Widget>[
-                        RaisedButton(
-                              child: Text("Login"),
-                              onPressed: _login,
-                            ),
-                            RaisedButton(
-                                child: Text("Create Account"),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                  builder: (context) => CreateAccount()
-                                ));
-                            }
+                        
+                        Container(
+                          padding: EdgeInsets.only(top:40),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          RaisedButton(
+                                child: Text("Login"),
+                                onPressed: _login,
+                              ),
+                              RaisedButton(
+                                  child: Text("Create Account"),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                    builder: (context) => CreateAccount()
+                                  ));
+                              }
+                          )
+                          ],),
                         )
-                        ],)
                       ],
                     )))
               ],
