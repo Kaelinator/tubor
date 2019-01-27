@@ -62,6 +62,10 @@ class Create extends State<CreateAccount> {
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Confirm Password"),
+                        ), Scaffold(
+appBar: AppBar(
+  
+),
                         ),
                         MaterialButton(
                           height: 50.0,
