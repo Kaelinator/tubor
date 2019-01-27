@@ -11,7 +11,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
 
-  bool _loggedIn = false;
+  bool _loggedIn = true;
 
   @override
   void initState() {
@@ -31,6 +31,14 @@ class _WelcomePageState extends State<WelcomePage> {
           _loggedIn = (user == null);
         });
       });
+
+    // FirebaseAuth.instance
+    //   .signInWithEmailAndPassword(
+    //     email: 'kirkkael@gmail.com',
+    //     password: 'ThisIsMahPassword'
+    //   );
+
+    FirebaseAuth.instance.signOut();
 
     super.initState();
   }
