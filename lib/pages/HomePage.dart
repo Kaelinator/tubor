@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/TutorList.dart';
 import '../pages/MyProfilePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -24,17 +25,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(actions: <Widget>[
         InkWell(
           child: Container(
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/DefaultGuy.png'),
-              minRadius: 10,
-              maxRadius: 25,
-            ),
-            padding: EdgeInsets.all(5)
-          ),
-          onTap: (){
-            Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyProfilePage()));
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/DefaultGuy.png'),
+                minRadius: 10,
+                maxRadius: 25,
+              ),
+              padding: EdgeInsets.all(5)),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MyProfilePage()));
           },
+          onLongPress: () => FirebaseAuth.instance.signOut(),
         )
       ]),
       body: Stack(
