@@ -27,6 +27,9 @@ class Create extends State<CreateAccount> {
             .document(user.uid)
             .setData({'name': name.text, 'email': email.text});
       })
+      .then((void _) {
+        Navigator.pop(context);
+      })
       .catchError((dynamic err) {
         setState(() {
           errorMsg = '${err.message}';
