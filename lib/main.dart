@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import './pages/HomePage.dart';
+import './pages/WelcomePage.dart';
+
+bool loggedIn = false;
 
 void main() => runApp(MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(title: 'hi'),
-    ));
-
+    title: 'Flutter Demo',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+      
+    ),
+    home: WelcomePage()));
