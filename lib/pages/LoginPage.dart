@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './HomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import './CreateAccount.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +10,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginState extends State<LoginPage> {
+  final email = TextEditingController();
+  final pass = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  void _login() {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email.text, password: pass.text);
+  }
+
   Widget build(BuildContext context) {
     return Material(
         color: Colors.greenAccent,
@@ -35,26 +47,36 @@ class LoginState extends State<LoginPage> {
                         child: Column(
                       children: <Widget>[
                         TextFormField(
+                          controller: email,
                           keyboardType: TextInputType.emailAddress,
+                          validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
                           decoration: InputDecoration(
-                              labelText: "Enter Email",
-                              fillColor: Colors.white),
+                              labelText: "Email", fillColor: Colors.white),
                         ),
                         TextFormField(
+                          controller: pass,
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          decoration:
-                              InputDecoration(labelText: "Enter Password"),
+                          validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
+                          decoration: InputDecoration(labelText: "Password"),
                         ),
-                        RaisedButton(
-                            child: Text("Create Account"),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HomePage(title: "hi")));
-                            })
+                        Row(
+                          children: <Widget>[
+                            RaisedButton(
+                              child: Text("Login"),
+                              onPressed: _login,
+                            ),
+                            RaisedButton(
+                                child: Text("Create Account"),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CreateAccount()));
+                                })
+                          ],
+                        )
                       ],
                     )))
               ],
