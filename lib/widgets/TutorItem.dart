@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+import '../pages/TutorProfilePage.dart';
 
 class TutorItem extends StatelessWidget {
-
   final DocumentSnapshot snapshot;
+  final f = new NumberFormat("###.0#", "en_US");
 
-  TutorItem({this.snapshot})
+  TutorItem({this.snapshot});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(snapshot['name']),
-      subtitle: Text('${snapshot['count'] ?? 'unknown'}'),
+      subtitle: Text('${snapshot['rating'] ?? 'subjects unknown'}'),
+      leading: new Container(
+        width: 40,
+        height: 40,
+        decoration: new BoxDecoration(
+            shape: BoxShape.circle,
+            image: new DecorationImage(
+                fit: BoxFit.fill,
+                image: new NetworkImage("https://i.imgur.com/BoN9kdC.png"))),
+      ),
+      trailing: Text((snapshot['rating'] != null
+          ? '${f.format(snapshot['rating'])} / 5.0'
+          : 'No rating')),
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => TutorProfilePage(snapshot: snapshot)));
+      },
     );
   }
 }
