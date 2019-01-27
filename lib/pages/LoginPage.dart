@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './HomePage.dart';
+import './CreateAccount.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,7 +13,8 @@ class LoginState extends State<LoginPage> {
         color: Colors.greenAccent,
         child: Scaffold(
             backgroundColor: Colors.blueGrey,
-            body: Column(
+            body: SingleChildScrollView(
+              child: Column(
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.all(40),
@@ -38,13 +39,24 @@ class LoginState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                               labelText: "Enter Email",
-                              fillColor: Colors.white),
+                              fillColor: Colors.white.withAlpha(0xde),
+                              ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter an email.';
+                            }
+                          },
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Enter Password"),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter a password.';
+                            }
+                          },
                         ),
                         RaisedButton(
                             child: Text("Create Account"),
@@ -53,11 +65,11 @@ class LoginState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          HomePage(title: "hi")));
+                                          CreateAccount()));
                             })
                       ],
                     )))
               ],
-            )));
+            ))));
   }
 }
