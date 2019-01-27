@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import './pages/HomePage.dart';
-import './pages/LoginPage.dart';
-import './pages/CreateAccount.dart';
+import './pages/WelcomePage.dart';
+
 bool loggedIn = false;
 
 void main() => runApp(MaterialApp(
@@ -10,4 +9,4 @@ void main() => runApp(MaterialApp(
       primarySwatch: Colors.blue,
       
     ),
-    home: (!loggedIn) ? CreateAccount() : HomePage(title: 'hi')));
+    home: WelcomePage()));
