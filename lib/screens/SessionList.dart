@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../widgets/SessionItem.dart';
+
 class SessionList extends StatelessWidget {
 
   final subjectId;
@@ -21,10 +23,7 @@ class SessionList extends StatelessWidget {
           default:
             return ListView(
               children: snapshot.data.documents.map((DocumentSnapshot document) {
-                return ListTile(
-                  title: Text(document['title']),
-                  subtitle: Text(document['author']),
-                );
+                return SessionItem(snapshot: document);
               }).toList(),
             );
         }

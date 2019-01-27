@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/TutorList.dart';
+import '../screens/SessionList.dart';
 import '../screens/UpcomingList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,11 +64,12 @@ class _HomePageState extends State<HomePage> {
                         return Text('Loading...');
                       default:
                         return DropdownButton(
-                          onChanged: (subj) => setState(() { subjectQuery = subj; }),
-                          value: subjectQuery,
+                          onChanged: (subj) => setState(() {print(subj); subjectQuery = subj; }),
+                          // value: subjectQuery,
                           items: snapshot.data.documents.map((DocumentSnapshot document) {
+
                             return DropdownMenuItem(
-                              value: document['id'],
+                              value: document.documentID,
                               child: Text('${document['subcategory']}')
                             );
                           }
@@ -115,7 +116,7 @@ class _HomePageState extends State<HomePage> {
           Offstage(
               offstage: _currentIndex != 0,
               child:
-                  TickerMode(enabled: _currentIndex == 0, child: TutorList())),
+                  TickerMode(enabled: _currentIndex == 0, child: SessionList(subjectQuery))),
           Offstage(
               offstage: _currentIndex != 1,
               child: TickerMode(
