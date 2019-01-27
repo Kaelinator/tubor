@@ -9,14 +9,19 @@ class UpcomingItem extends StatelessWidget {
 
   UpcomingItem({this.snapshot});
 var  list = ["Math","Science","English","Social Studies","Spanish"];
+
   @override
   Widget build(BuildContext context) {
-    
+    var vlist = (snapshot['subjects']);
+  
     return Container(
       height: 80,
     child: ListTile(
+      
       title: Text(snapshot['name']),
-      subtitle: Text(list[0]),
+      subtitle: Text(
+  
+      list[0]),
       trailing: Text("   06/19/01\n11pm-3am"),
       
       onTap: () {

@@ -85,6 +85,10 @@ class Create extends State<CreateAccount> {
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Confirm Password"),
+                        ), Scaffold(
+appBar: AppBar(
+  
+),
                         ),
                         Container(
                           padding: EdgeInsets.only(top:40),
