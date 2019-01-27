@@ -23,7 +23,7 @@ class TutorProfilePage extends StatelessWidget {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundImage: 
-                          snapshot['photo']
+                          (snapshot['photo'] != null)
                             ? NetworkImage("${snapshot['photo']}")
                             : AssetImage('assets/DefaultGuy.png'),
                         minRadius: 50,

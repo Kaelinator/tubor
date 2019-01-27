@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_calendar/flutter_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class MyProfilePage extends StatefulWidget {
+
+class MyProfilePage extends StatelessWidget {
   final DocumentReference reference;
   final DocumentSnapshot snapshot;
   MyProfilePage({this.snapshot, this.reference});
-  @override
-  _MyProfilePageState createState() => _MyProfilePageState();
-}
-
-class _MyProfilePageState extends State<MyProfilePage> {
-  final DocumentReference reference;
-  final DocumentSnapshot snapshot;
-  _MyProfilePageState({this.snapshot, this.reference});
-
-  Image _image;
 
   void _logout(BuildContext context) {
     FirebaseAuth.instance.signOut().then((void x) {
       Navigator.pop(context);
     });
-  }
-
-  void getImage() {
-    ImagePicker.pickImage(source: ImageSource.camera)
-      .then((dynamic img) {
-        setState(() {
-          _image = img;
-        });
-      });
   }
 
   void _chooseTime(BuildContext context) {
@@ -49,6 +30,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (snapshot == null)
+      return Container(child: Text('loading'));
     return Material(
         color: Colors.greenAccent,
         child: Scaffold(
@@ -66,9 +49,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       padding: EdgeInsets.all(15),
                       child: CircleAvatar(
                         backgroundImage: 
-                        (snapshot['photo'] != null)
-                          ? NetworkImage("${snapshot['photo']}")
-                          : AssetImage('assets/DefaultGuy.png'),
+                          (snapshot['photo'] != null)
+                            ? NetworkImage("${snapshot['photo']}")
+                            : AssetImage('assets/DefaultGuy.png'),
                         minRadius: 50,
                         maxRadius: 100,
                       ),
