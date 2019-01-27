@@ -13,13 +13,12 @@ class SessionItem extends StatelessWidget {
       children: <Widget>[
         const ListTile(
           contentPadding: EdgeInsets.all(10),
-          leading: Image(
-            image: AssetImage('assets/DefaultGuy.png'), 
+          leading: Icon(Icons.calendar_today), 
             /* (snapshot['photo'] != null)
             ? NetworkImage("${snapshot['photo']}")
-            : AssetImage('assets/DefaultGuy.png'),*/
+            : AssetImage('assets/DefaultGuy.png'),
             width: 50,
-            height: 50),
+            height: 50),*/
           title: Text("(subject) Session"),
           subtitle: Text(
               "Tutor: (tutorName) \nStarts: (start)\nEnds: (endTime)\nSlots Available: (size - enrolledStudents)\nCost: \$(cost)",
