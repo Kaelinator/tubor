@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './pages/WelcomePage.dart';
+import './pages/CreateAccount.dart';
 
 bool loggedIn = false;
 
@@ -8,4 +8,4 @@ void main() => runApp(MaterialApp(
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: WelcomePage()));
+    home: CreateAccount()));
