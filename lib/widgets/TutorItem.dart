@@ -5,7 +5,7 @@ class TutorItem extends StatelessWidget {
 
   final DocumentSnapshot snapshot;
 
-  TutorItem({this.snapshot})
+  TutorItem({this.snapshot});
 
   @override
   Widget build(BuildContext context) {
