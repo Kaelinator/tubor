@@ -34,7 +34,7 @@ class LoginState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image(
-                        image: AssetImage("assets/kseLogo.png"),
+                        image: AssetImage("assets/logo.png"),
                         fit: BoxFit.scaleDown,
                         width: (MediaQuery.of(context).size.width * 0.65),
                         height: (MediaQuery.of(context).size.width * 0.65),
