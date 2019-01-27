@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './HomePage.dart';
+import './CreateAccount.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -52,8 +52,7 @@ class LoginState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          HomePage(title: "hi")));
+                                      builder: (context) => CreateAccount()));
                             })
                       ],
                     )))
