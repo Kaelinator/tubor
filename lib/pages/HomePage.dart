@@ -16,9 +16,12 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   DocumentSnapshot snapshot;
+  String subjectQuery;
 
   @override
   void initState() {
+
+    // handle user
     FirebaseAuth.instance
       .currentUser()
       .then((FirebaseUser user) {
@@ -32,6 +35,7 @@ class _HomePageState extends State<HomePage> {
           snapshot = snap;
         });
       });
+
     super.initState();
   }
 
@@ -44,7 +48,50 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: <Widget>[
+      appBar: AppBar(
+        title: Stack(
+        children: <Widget>[
+          Offstage(
+              offstage: _currentIndex != 0,
+              child: TickerMode(
+                enabled: _currentIndex == 0,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance.collection('subjects').snapshots(),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Text('Loading...');
+                      default:
+                        return DropdownButton(
+                          onChanged: (subj) => setState(() { subjectQuery = subj; }),
+                          value: subjectQuery,
+                          items: snapshot.data.documents.map((DocumentSnapshot document) {
+                            return DropdownMenuItem(
+                              value: document['id'],
+                              child: Text('${document['subcategory']}')
+                            );
+                          }
+                        ).toList()
+                      );
+                    }
+                  },
+                ),
+              )),
+          Offstage(
+              offstage: _currentIndex != 1,
+              child: TickerMode(
+                  enabled: _currentIndex == 1,
+                  child: Text('') // replace with page
+                  )),
+          Offstage(
+              offstage: _currentIndex != 2,
+              child: TickerMode(
+                  enabled: _currentIndex == 2,
+                  child: Text(''))),
+        ],
+      ),
+        actions: <Widget>[
         InkWell(
           child: Container(
               child: CircleAvatar(
