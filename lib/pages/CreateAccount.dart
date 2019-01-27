@@ -51,7 +51,7 @@ class Create extends State<CreateAccount> {
               child: Column(
                 children: <Widget>[
                   Image(
-                    image: AssetImage("assets/kseLogo.png"),
+                    image: AssetImage("assets/logo.png"),
                     fit: BoxFit.cover,
                     width: (MediaQuery.of(context).size.width * 0.65),
                     height: (MediaQuery.of(context).size.width * 0.65),
