@@ -6,7 +6,7 @@ import '../pages/TutorProfilePage.dart';
 
 class TutorItem extends StatelessWidget {
   final DocumentSnapshot snapshot;
-  final f = new NumberFormat("###.0#", "en_US");
+  final f = NumberFormat("#.0", "en_US");
 
   TutorItem({this.snapshot});
 
@@ -15,14 +15,14 @@ class TutorItem extends StatelessWidget {
     return ListTile(
       title: Text(snapshot['name']),
       subtitle: Text('${snapshot['rating'] ?? 'subjects unknown'}'),
-      leading: new Container(
+      leading: Container(
         width: 40,
         height: 40,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: new DecorationImage(
+            image: DecorationImage(
                 fit: BoxFit.fill,
-                image: new NetworkImage("https://i.imgur.com/BoN9kdC.png"))),
+                image: NetworkImage("https://i.imgur.com/BoN9kdC.png"))),
       ),
       trailing: Text((snapshot['rating'] != null
           ? '${f.format(snapshot['rating'])} / 5.0'
