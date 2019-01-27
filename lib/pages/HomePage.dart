@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/TutorList.dart';
-
+import '../screens/UpcomingList.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             offstage: _currentIndex != 1,
             child: TickerMode(
               enabled: _currentIndex == 1,
-              child: const Text('Forms')
+              child: UpcomingList() // replace with page
             )
           ),
           Offstage(

@@ -42,6 +42,7 @@ class Create extends State<CreateAccount> {
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Enter Password"),
+                              
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
@@ -62,7 +63,7 @@ class Create extends State<CreateAccount> {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(title: 'hi')));
                           },
                         )
-                      ],
+                      ], 
                     )))
               ],
             )));
