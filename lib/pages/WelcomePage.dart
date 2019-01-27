@@ -24,6 +24,14 @@ class _WelcomePageState extends State<WelcomePage> {
         });
       });
 
+    FirebaseAuth.instance
+      .onAuthStateChanged
+      .listen((FirebaseUser user) {
+        setState(() {
+          _loggedIn = (user == null);
+        });
+      });
+
     super.initState();
   }
 
