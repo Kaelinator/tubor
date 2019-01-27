@@ -25,7 +25,8 @@ class LoginState extends State<LoginPage> {
         color: Colors.greenAccent,
         child: Scaffold(
             backgroundColor: Colors.blueGrey,
-            body: Column(
+            body: SingleChildScrollView(
+              child: Column(
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.all(40),
@@ -51,18 +52,20 @@ class LoginState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
                           decoration: InputDecoration(
-                              labelText: "Email", fillColor: Colors.white),
+                              labelText: "Email",
+                              fillColor: Colors.white,
+                              ),
                         ),
                         TextFormField(
                           controller: pass,
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           validator: (val) => (val.isEmpty) ? 'Please enter text' : null,
-                          decoration: InputDecoration(labelText: "Password"),
+                          decoration:
+                              InputDecoration(labelText: "Password"),
                         ),
-                        Row(
-                          children: <Widget>[
-                            RaisedButton(
+                        Row(children: <Widget>[
+                        RaisedButton(
                               child: Text("Login"),
                               onPressed: _login,
                             ),
@@ -72,14 +75,14 @@ class LoginState extends State<LoginPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              CreateAccount()));
-                                })
-                          ],
+                                  builder: (context) => CreateAccount()
+                                ));
+                            }
                         )
+                        ],)
                       ],
                     )))
               ],
-            )));
+            ))));
   }
 }

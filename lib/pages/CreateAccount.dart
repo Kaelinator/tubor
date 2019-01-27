@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
-//https://flutter.io/docs/development/ui/assets-and-images
   State createState() => Create();
 }
 
@@ -28,12 +27,14 @@ class Create extends State<CreateAccount> {
         color: Colors.greenAccent,
         child: Scaffold(
             backgroundColor: Colors.blueGrey,
-            body: Stack(
-              fit: StackFit.expand,
+            body: SingleChildScrollView(
+              child: Column(
               children: <Widget>[
                 Image(
                   image: AssetImage("assets/kseLogo.png"),
                   fit: BoxFit.cover,
+                  width: (MediaQuery.of(context).size.width * 0.65),
+                  height: (MediaQuery.of(context).size.width * 0.65),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -76,6 +77,6 @@ class Create extends State<CreateAccount> {
                       ],
                     )))
               ],
-            )));
+            ))));
   }
 }
