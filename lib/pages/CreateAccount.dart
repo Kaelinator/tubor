@@ -9,17 +9,22 @@ class CreateAccount extends StatefulWidget {
 
 class Create extends State<CreateAccount> {
   final pass = TextEditingController();
+  final confirmPass = TextEditingController();
   final email = TextEditingController();
+  final errorMsg = "Form incomplete";
 
   void _createAccount(BuildContext context) {
-
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email.text,
-      password: pass.text
-    ).then((FirebaseUser user) {
-      if (user != null)
-        Navigator.pop(context);
-    });
+    if ((pass.text == confirmPass.text) && (email.text.contains("@"))) {
+      //shan said regex for contains @ . com net org
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: email.text, password: pass.text)
+          .then((FirebaseUser user) {
+        if (user != null) Navigator.pop(context);
+      });
+    } else {
+      // show error
+    }
   }
 
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class Create extends State<CreateAccount> {
         child: Scaffold(
             backgroundColor: Colors.blueGrey,
             body: SingleChildScrollView(
-              child: Column(
+                child: Column(
               children: <Widget>[
                 Image(
                   image: AssetImage("assets/kseLogo.png"),
@@ -40,8 +45,25 @@ class Create extends State<CreateAccount> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[],
                 ),
+                Container( //errorblock
+                    padding: EdgeInsets.only(left: 40,top: 30, right: 40),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Account Creation Failed:\n",
+                          style:
+                              TextStyle(color: Colors.redAccent, fontSize: 20),
+                        ),
+                        Text(
+                          "$errorMsg",
+                          style:
+                              TextStyle(color: Colors.redAccent, fontSize: 20),
+                        ),
+                      ],
+                    )), //error block
                 Container(
-                    padding: EdgeInsets.all(40),
+                    padding: EdgeInsets.only(left:40,right:40,bottom:40),
                     child: Form(
                         child: Column(
                       children: <Widget>[
@@ -59,20 +81,24 @@ class Create extends State<CreateAccount> {
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
+                          controller: confirmPass,
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Confirm Password"),
                         ),
-                        MaterialButton(
-                          height: 50.0,
-                          minWidth: 300.0,
-                          color: Colors.green,
-                          splashColor: Colors.teal,
-                          textColor: Colors.white,
-                          child: new Container(
-                            child: new Text("Create Account"),
+                        Container(
+                          padding: EdgeInsets.only(top:40),
+                          child: MaterialButton(
+                            height: 50.0,
+                            minWidth: 300.0,
+                            color: Colors.green,
+                            splashColor: Colors.teal,
+                            textColor: Colors.white,
+                            child: new Container(
+                              child: new Text("Create Account"),
+                            ),
+                            onPressed: () => _createAccount(context),
                           ),
-                          onPressed: () => _createAccount(context),
                         )
                       ], 
                     )))
