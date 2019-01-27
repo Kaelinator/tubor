@@ -19,10 +19,9 @@ class LoginState extends State<LoginPage> {
     FirebaseAuth.instance
       .signInWithEmailAndPassword(email: email.text, password: pass.text)
       .then((user) => print('logged in!'))
-      .catchError(() {
-        print('Error!!!');
+      .catchError((dynamic err) {
         setState(() {
-          errorMsg = 'Incorrect credentials';
+          errorMsg = '${err.message}';
         });
       });
   }
@@ -50,21 +49,21 @@ class LoginState extends State<LoginPage> {
                   ),
                 ),
                 (errorMsg.length != 0)
-                  ? Container(
-                      padding: EdgeInsets.only(left: 40, right: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Login Failed: $errorMsg",
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 20,
+                    ? Container(
+                        padding: EdgeInsets.only(left: 40, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Login Failed: $errorMsg",
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ) : Text(''),
+                          ],
+                        ))
+                    : Text(''),
                 Container(
                     padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
                     child: Form(
@@ -75,9 +74,7 @@ class LoginState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (val) =>
                               (val.isEmpty) ? 'Please enter your email' : null,
-                          decoration: InputDecoration(
-                            labelText: "Email"
-                          ),
+                          decoration: InputDecoration(labelText: "Email"),
                         ),
                         TextFormField(
                           controller: pass,
