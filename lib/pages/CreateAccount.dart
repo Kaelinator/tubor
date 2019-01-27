@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -11,7 +12,8 @@ class Create extends State<CreateAccount> {
   final pass = TextEditingController();
   final confirmPass = TextEditingController();
   final email = TextEditingController();
-  final errorMsg = "Form incomplete";
+  final name = TextEditingController();
+  String errorMsg = "";
 
   void _createAccount(BuildContext context) {
     if ((pass.text == confirmPass.text) && (email.text.contains("@"))) {
@@ -20,10 +22,23 @@ class Create extends State<CreateAccount> {
           .createUserWithEmailAndPassword(
               email: email.text, password: pass.text)
           .then((FirebaseUser user) {
-        if (user != null) Navigator.pop(context);
+        return Firestore.instance
+            .collection('users')
+            .document(user.uid)
+            .setData({'name': name.text, 'email': email.text});
+      })
+      .then((void _) {
+        Navigator.pop(context);
+      })
+      .catchError((dynamic err) {
+        setState(() {
+          errorMsg = '${err.message}';
+        });
       });
     } else {
-      // show error
+      setState(() {
+        errorMsg = 'incomplete form';
+      });
     }
   }
 
@@ -31,47 +46,44 @@ class Create extends State<CreateAccount> {
     return Material(
         color: Colors.greenAccent,
         child: Scaffold(
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: Colors.white,
             body: SingleChildScrollView(
-                child: Column(
-              children: <Widget>[
-                Image(
-                  image: AssetImage("assets/kseLogo.png"),
-                  fit: BoxFit.cover,
-                  width: (MediaQuery.of(context).size.width * 0.65),
-                  height: (MediaQuery.of(context).size.width * 0.65),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
-                ),
-                Container( //errorblock
-                    padding: EdgeInsets.only(left: 40,top: 30, right: 40),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Account Creation Failed:\n",
-                          style:
-                              TextStyle(color: Colors.redAccent, fontSize: 20),
-                        ),
+              child: Column(
+                children: <Widget>[
+                  Image(
+                    image: AssetImage("assets/kseLogo.png"),
+                    fit: BoxFit.cover,
+                    width: (MediaQuery.of(context).size.width * 0.65),
+                    height: (MediaQuery.of(context).size.width * 0.65),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[],
+                  ),
+                  Center(
+                    child: Container(
+                    //errorblock
+                    padding: EdgeInsets.only(left: 40, top: 30, right: 40),
+                    child: 
                         Text(
                           "$errorMsg",
-                          style:
-                              TextStyle(color: Colors.redAccent, fontSize: 20),
+                          style: TextStyle(color: Colors.redAccent, fontSize: 20),
                         ),
-                      ],
-                    )), //error block
+                      ),
+                  ),
                 Container(
-                    padding: EdgeInsets.only(left:40,right:40,bottom:40),
+                    padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
                     child: Form(
                         child: Column(
                       children: <Widget>[
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: email,
-                          decoration: InputDecoration(
-                              labelText: "Email", fillColor: Colors.white),
+                          decoration: InputDecoration(labelText: "Email"),
+                        ),
+                        TextFormField(
+                          controller: name,
+                          decoration: InputDecoration(labelText: "Name"),
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
@@ -83,15 +95,10 @@ class Create extends State<CreateAccount> {
                           keyboardType: TextInputType.text,
                           controller: confirmPass,
                           obscureText: true,
-                          decoration:
-                              InputDecoration(labelText: "Confirm Password"),
-                        ), Scaffold(
-appBar: AppBar(
-  
-),
+                          decoration: InputDecoration(labelText: "Confirm Password"),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top:40),
+                          padding: EdgeInsets.only(top: 40),
                           child: MaterialButton(
                             height: 50.0,
                             minWidth: 300.0,
@@ -104,7 +111,7 @@ appBar: AppBar(
                             onPressed: () => _createAccount(context),
                           ),
                         )
-                      ], 
+                      ],
                     )))
               ],
             ))));

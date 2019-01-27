@@ -13,7 +13,7 @@ class TutorProfilePage extends StatelessWidget {
             appBar: AppBar(
               title: Text('${snapshot['name']}\'s Profile'),
             ),
-            backgroundColor: Colors.blueGrey,
+            // backgroundColor: Colors.white,
             body: Column(
               children: <Widget>[
                 Container(
@@ -22,7 +22,10 @@ class TutorProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage:  NetworkImage("https://i.imgur.com/BoN9kdC.png"),
+                        backgroundImage: 
+                          snapshot['photo']
+                            ? NetworkImage("${snapshot['photo']}")
+                            : AssetImage('assets/DefaultGuy.png'),
                         minRadius: 50,
                         maxRadius: 100,
                       )
