@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-//https://flutter.io/docs/development/ui/assets-and-images
   State createState() => LoginState();
 }
 
@@ -13,16 +13,21 @@ class LoginState extends State<LoginPage> {
         color: Colors.greenAccent,
         child: Scaffold(
             backgroundColor: Colors.blueGrey,
-            body: Stack(
-              fit: StackFit.expand,
+            body: Column(
               children: <Widget>[
-                Image(
-                  image: AssetImage("assets/kseLogo.png"),
-                  fit: BoxFit.cover,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
+                Container(
+                  padding: EdgeInsets.all(40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage("assets/kseLogo.png"),
+                        fit: BoxFit.scaleDown,
+                        width: (MediaQuery.of(context).size.width * 0.65),
+                        height: (MediaQuery.of(context).size.width * 0.65),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                     padding: EdgeInsets.all(40),
@@ -40,7 +45,16 @@ class LoginState extends State<LoginPage> {
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Enter Password"),
-                        ), 
+                        ),
+                        RaisedButton(
+                            child: Text("Create Account"),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomePage(title: "hi")));
+                            })
                       ],
                     )))
               ],
