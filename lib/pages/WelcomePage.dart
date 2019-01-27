@@ -28,7 +28,6 @@ class _WelcomePageState extends State<WelcomePage> {
       .onAuthStateChanged
       .listen((FirebaseUser user) {
         bool loggedIn = (user != null);
-        print('log changed! $loggedIn');
         setState(() {
           _loggedIn = loggedIn;
         });
@@ -40,7 +39,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilding welcome! $_loggedIn');
     return Container(
       child: (_loggedIn) ? HomePage() : LoginPage()
     );
