@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import '../screens/TutorList.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => new _HomePageState();
@@ -23,7 +22,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Home'),
+        leading: InkWell(
+          onTap: () => FirebaseAuth.instance.signOut(),
+          child: const Text('Sign out')
+        ),
       ),
       body: Stack(
         children: <Widget>[
