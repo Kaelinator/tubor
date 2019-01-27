@@ -25,7 +25,7 @@ class TutorProfilePage extends StatelessWidget {
                         backgroundImage:  NetworkImage("https://i.imgur.com/BoN9kdC.png"),
                         minRadius: 50,
                         maxRadius: 100,
-                      ),
+                      )
                     ],
                   ),
                 ),
