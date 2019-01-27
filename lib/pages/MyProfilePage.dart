@@ -100,7 +100,17 @@ class MyProfilePage extends StatelessWidget {
                         );
                       }
                     ).then((Session s) {
-                      print('${s.startTime} ${s.cost}');
+                      Firestore.instance
+                        .collection('events')
+                        .document()
+                        .setData({
+                          'start': s.startTime.format(context),
+                          'end': s.endTime.format(context),
+                          'cost': s.cost,
+                          'subject': s.subject,
+                          'enrolledStudents': [],
+                          'tutorId': snapshot.documentID,
+                        });
                     });
                     
                   },

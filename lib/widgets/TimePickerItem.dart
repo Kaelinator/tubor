@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/Session.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TimePickerItem extends StatefulWidget {
   final Function onDone;
@@ -15,6 +16,7 @@ class _TimePickerItemState extends State<TimePickerItem> {
 
   final cost = TextEditingController(text: '0');
 
+  String subjectQuery;
   TimeOfDay startTime = TimeOfDay.now();
   TimeOfDay endTime = TimeOfDay.now();
 
@@ -67,8 +69,35 @@ class _TimePickerItemState extends State<TimePickerItem> {
                 ),
                 RaisedButton(
                   child: const Text('Done'),
-                  onPressed: () => widget.onDone(Session(cost: cost.text, endTime: endTime, startTime: startTime)),
-                )
+                  onPressed: () => widget.onDone(Session(
+                    cost: cost.text,
+                    endTime: endTime,
+                    subject: subjectQuery,
+                    startTime: startTime)),
+                ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance.collection('subjects').snapshots(),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Text('Loading...');
+                      default:
+                        return DropdownButton(
+                          onChanged: (subj) => setState(() {print(subj); subjectQuery = subj; }),
+                          value: subjectQuery,
+                          items: snapshot.data.documents.map((DocumentSnapshot document) {
+
+                            return DropdownMenuItem(
+                              value: document.documentID,
+                              child: Text('${document['subcategory']}')
+                            );
+                          }
+                        ).toList()
+                      );
+                    }
+                  },
+                ),
               ],
             )
           ],

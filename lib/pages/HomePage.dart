@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                       default:
                         return DropdownButton(
                           onChanged: (subj) => setState(() {print(subj); subjectQuery = subj; }),
-                          // value: subjectQuery,
+                          value: subjectQuery,
                           items: snapshot.data.documents.map((DocumentSnapshot document) {
 
                             return DropdownMenuItem(

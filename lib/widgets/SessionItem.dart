@@ -14,23 +14,20 @@ class _SessionItemState extends State<SessionItem> {
   final DocumentSnapshot snapshot;
   _SessionItemState({this.snapshot});
 
-  String subjects = "";
+  String subject = "";
 
   @override
   void initState() {
     
-    // snapshot['subjects'].map((String id) {
-    //   return Firestore.instance
-    //     .collection('subjects')
-    //     .document(id)
-    //     .get()
-    //     .then((DocumentSnapshot snap) => snap['subcategory'])
-    //     .then((dynamic sub) {
-    //       setState(() {
-    //         subjects = '$sub $subjects';
-    //       });
-    //     });
-    // });
+    Firestore.instance
+      .collection('subjects')
+      .document(snapshot['subject'])
+      .get()
+      .then((DocumentSnapshot subjectSnap) {
+        setState(() {
+          subject = subjectSnap['subcategory'];
+        });
+      });
 
     super.initState();
   }
@@ -51,7 +48,7 @@ class _SessionItemState extends State<SessionItem> {
             : AssetImage('assets/DefaultGuy.png'),*/
             width: 50,
             height: 50),
-          title: Text('$subjects Session'),
+          title: Text('$subject Session'),
           subtitle: Text(
             // 'Tutor: (tutorName)\n' +
             'Starts: ${snapshot['start']}\n' +
@@ -61,10 +58,11 @@ class _SessionItemState extends State<SessionItem> {
               ),
         ),
         ButtonTheme.bar(
-            child: ButtonBar(
+          child: ButtonBar(
           children: <Widget>[
-            FlatButton(child: Text('Cancel'), onPressed: () {/* */}),
-            FlatButton(child: Text('Join Session'), onPressed: () {/* */})
+            FlatButton(child: Text('Join Session'), onPressed: () {
+
+            })
           ],
         ))
       ],
