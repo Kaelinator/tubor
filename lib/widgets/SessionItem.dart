@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SessionItem extends StatefulWidget {
   final DocumentSnapshot snapshot;
@@ -54,14 +55,23 @@ class _SessionItemState extends State<SessionItem> {
             'Starts: ${snapshot['start']}\n' +
             'Ends: ${snapshot['end']}\n' +
             'Slots Available: ${(snapshot['size'] ?? 0) - snapshot['enrolledStudents'].length}\n' +
-            'Cost: ${snapshot['cost']}'
+            'Cost: \$${snapshot['cost']}'
               ),
         ),
         ButtonTheme.bar(
           child: ButtonBar(
           children: <Widget>[
             FlatButton(child: Text('Join Session'), onPressed: () {
+              FirebaseAuth.instance
+                .currentUser()
+                .then((FirebaseUser user) {
+                  
+                  Firestore.instance
+                    .collection('events')
+                    .document(snapshot.documentID)
+                    .updateData({ 'enrolledStudents': [ user.uid ] });
 
+                });
             })
           ],
         ))

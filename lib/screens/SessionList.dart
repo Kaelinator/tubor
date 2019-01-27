@@ -10,11 +10,17 @@ class SessionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference ref = Firestore.instance
+      .collection('events');
+      // .where('');
+
+    Stream<QuerySnapshot> stream = (subjectId == null)
+      ? ref.snapshots()
+      : ref.where('subject', isEqualTo: subjectId)
+        .snapshots();
+
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance
-        .collection('events')
-        .where('subjects', arrayContains: subjectId)
-        .snapshots(),
+      stream: stream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError)
           return Text('Error: ${snapshot.error}');
