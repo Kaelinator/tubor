@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../widgets/CalendarPickerItem.dart';
 
 class TutorProfilePage extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -25,7 +26,7 @@ class TutorProfilePage extends StatelessWidget {
                         backgroundImage:  NetworkImage("https://i.imgur.com/BoN9kdC.png"),
                         minRadius: 50,
                         maxRadius: 100,
-                      ),
+                      )
                     ],
                   ),
                 ),

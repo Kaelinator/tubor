@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../widgets/CalendarPickerItem.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import './HomePage.dart';
+
 
 class MyProfilePage extends StatelessWidget {
-
   final DocumentSnapshot snapshot;
   MyProfilePage({this.snapshot});
+
+  void _logout(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +23,11 @@ class MyProfilePage extends StatelessWidget {
               title: Text('My Profile'),
             ),
             backgroundColor: Colors.blueGrey,
-            body: Column(
+            body: SingleChildScrollView(
+                child: Column(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(40),
+                  padding: EdgeInsets.all(15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -30,7 +39,28 @@ class MyProfilePage extends StatelessWidget {
                     ],
                   ),
                 ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: 15, right: 15),
+                  child: Text(
+                    "Your Name\nYour E-Mail\n\nBio",
+                    style: new TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15),
+                  child: TextField(
+                    maxLines: 4,
+                    maxLength: 150,
+                    maxLengthEnforced: true,
+                  ),
+                ),
+                RaisedButton(
+                  child: Text("Sign Out"),
+                  onPressed: () => _logout(context),
+                )
               ],
-            )));
+            ))));
   }
 }
