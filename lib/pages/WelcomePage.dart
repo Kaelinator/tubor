@@ -32,14 +32,6 @@ class _WelcomePageState extends State<WelcomePage> {
         });
       });
 
-    // FirebaseAuth.instance
-    //   .signInWithEmailAndPassword(
-    //     email: 'kirkkael@gmail.com',
-    //     password: 'ThisIsMahPassword'
-    //   );
-
-    FirebaseAuth.instance.signOut();
-
     super.initState();
   }
 
