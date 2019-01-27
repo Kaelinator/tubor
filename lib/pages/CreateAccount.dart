@@ -60,18 +60,17 @@ class Create extends State<CreateAccount> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[],
                   ),
-                  Container(
+                  Center(
+                    child: Container(
                     //errorblock
                     padding: EdgeInsets.only(left: 40, top: 30, right: 40),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                    child: 
                         Text(
                           "$errorMsg",
                           style: TextStyle(color: Colors.redAccent, fontSize: 20),
                         ),
-                      ],
-                    )), //error block
+                      ),
+                  ),
                 Container(
                     padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
                     child: Form(

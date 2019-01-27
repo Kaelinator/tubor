@@ -48,22 +48,17 @@ class LoginState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                (errorMsg.length != 0)
-                    ? Container(
-                        padding: EdgeInsets.only(left: 40, right: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Login Failed: $errorMsg",
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ))
-                    : Text(''),
+                Center(
+                  child: Container(
+                  //errorblock
+                  padding: EdgeInsets.only(left: 40, right: 40),
+                  child: 
+                      Text(
+                        "$errorMsg",
+                        style: TextStyle(color: Colors.redAccent, fontSize: 20),
+                      ),
+                    ),
+                ),
                 Container(
                     padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
                     child: Form(
