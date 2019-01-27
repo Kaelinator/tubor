@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../screens/TutorList.dart';
-import '../pages/MyProfilePage.dart';
+import '../screens/UpcomingList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'MyProfilePage.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
@@ -45,9 +45,12 @@ class _HomePageState extends State<HomePage> {
               child:
                   TickerMode(enabled: _currentIndex == 0, child: TutorList())),
           Offstage(
-              offstage: _currentIndex != 1,
-              child: TickerMode(
-                  enabled: _currentIndex == 1, child: const Text('Forms'))),
+            offstage: _currentIndex != 1,
+            child: TickerMode(
+              enabled: _currentIndex == 1,
+              child: UpcomingList() // replace with page
+            )
+          ),
           Offstage(
               offstage: _currentIndex != 2,
               child: TickerMode(

@@ -100,7 +100,7 @@ class Create extends State<CreateAccount> {
                             onPressed: () => _createAccount(context),
                           ),
                         )
-                      ],
+                      ], 
                     )))
               ],
             ))));
