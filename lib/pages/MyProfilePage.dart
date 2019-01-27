@@ -68,11 +68,34 @@ class MyProfilePage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 15, right: 15),
+                  padding: EdgeInsets.only(left: 15, top: 10,right: 15),
                   child: TextField(
                     maxLines: 4,
                     maxLength: 150,
                     maxLengthEnforced: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder()
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: 15, right: 15),
+                  child: Text(
+                    "Contact Info",
+                    style: new TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, top: 10,right: 15),
+                  child: TextField(
+                    maxLines: 1,
+                    maxLength: 40,
+                    maxLengthEnforced: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder()
+                    ),
                   ),
                 ),
                 RaisedButton(
