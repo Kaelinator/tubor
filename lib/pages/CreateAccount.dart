@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'HomePage.dart';
 
-class LoginPage extends StatefulWidget {
+class CreateAccount extends StatefulWidget {
   @override
 //https://flutter.io/docs/development/ui/assets-and-images
-  State createState() => LoginState();
+  State createState() => Create();
 }
 
-class LoginState extends State<LoginPage> {
+class Create extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Material(
         color: Colors.greenAccent,
@@ -35,12 +36,32 @@ class LoginState extends State<LoginPage> {
                               labelText: "Enter Email",
                               fillColor: Colors.white),
                         ),
+                       
                         TextFormField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           decoration:
                               InputDecoration(labelText: "Enter Password"),
-                        ), 
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          decoration:
+                              InputDecoration(labelText: "Confirm Password"),
+                        ),
+                        MaterialButton(
+                          height: 50.0,
+                          minWidth: 300.0,
+                          color: Colors.green,
+                          splashColor: Colors.teal,
+                          textColor: Colors.white,
+                          child: new Container(
+                            child: new Text("Create Account"),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(title: 'hi')));
+                          },
+                        )
                       ],
                     )))
               ],
