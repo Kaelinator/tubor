@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'HomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -9,6 +9,20 @@ class CreateAccount extends StatefulWidget {
 }
 
 class Create extends State<CreateAccount> {
+  final pass = TextEditingController();
+  final email = TextEditingController();
+
+  void _createAccount(BuildContext context) {
+
+    FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email.text,
+      password: pass.text
+    ).then((FirebaseUser user) {
+      if (user != null)
+        Navigator.pop(context);
+    });
+  }
+
   Widget build(BuildContext context) {
     return Material(
         color: Colors.greenAccent,
@@ -32,16 +46,15 @@ class Create extends State<CreateAccount> {
                       children: <Widget>[
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
+                          controller: email,
                           decoration: InputDecoration(
-                              labelText: "Enter Email",
-                              fillColor: Colors.white),
+                              labelText: "Email", fillColor: Colors.white),
                         ),
-                       
                         TextFormField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          decoration:
-                              InputDecoration(labelText: "Enter Password"),
+                          controller: pass,
+                          decoration: InputDecoration(labelText: "Password"),
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,
@@ -58,9 +71,7 @@ class Create extends State<CreateAccount> {
                           child: new Container(
                             child: new Text("Create Account"),
                           ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                          },
+                          onPressed: () => _createAccount(context),
                         )
                       ],
                     )))

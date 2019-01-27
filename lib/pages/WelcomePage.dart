@@ -27,18 +27,12 @@ class _WelcomePageState extends State<WelcomePage> {
     FirebaseAuth.instance
       .onAuthStateChanged
       .listen((FirebaseUser user) {
+        bool loggedIn = (user != null);
+        print('log changed! $loggedIn');
         setState(() {
-          _loggedIn = (user == null);
+          _loggedIn = loggedIn;
         });
       });
-
-    FirebaseAuth.instance
-      .signInWithEmailAndPassword(
-        email: 'kirkkael@gmail.com',
-        password: 'ThisIsMahPassword'
-      );
-
-    //FirebaseAuth.instance.signOut();
 
     super.initState();
   }
@@ -46,8 +40,9 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuilding welcome! $_loggedIn');
     return Container(
-      child: (_loggedIn) ? LoginPage() : HomePage()
+      child: (_loggedIn) ? HomePage() : LoginPage()
     );
   }
 }
