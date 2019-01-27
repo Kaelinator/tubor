@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_calendar/flutter_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import '../widgets/TimePickerItem.dart';
+import '../utils/Session.dart';
 
 class MyProfilePage extends StatelessWidget {
   final DocumentReference reference;
@@ -15,23 +16,9 @@ class MyProfilePage extends StatelessWidget {
     });
   }
 
-  void _chooseTime(BuildContext context) {
-    showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    showDatePicker(
-        firstDate: DateTime.now(),
-        lastDate:
-            DateTime.now().add(Duration(hours: 168, minutes: 0, seconds: 0)),
-        initialDate: DateTime.now(),
-        context: context);
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (snapshot == null)
-      return Container(child: Text('loading'));
+    if (snapshot == null) return Container(child: Text('loading'));
     return Material(
         color: Colors.greenAccent,
         child: Scaffold(
@@ -43,21 +30,19 @@ class MyProfilePage extends StatelessWidget {
                 child: Column(
               children: <Widget>[
                 Center(
-                  child: InkWell(
-                    onLongPress: () => print('change profile'),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: CircleAvatar(
-                        backgroundImage: 
-                          (snapshot['photo'] != null)
-                            ? NetworkImage("${snapshot['photo']}")
-                            : AssetImage('assets/DefaultGuy.png'),
-                        minRadius: 50,
-                        maxRadius: 100,
-                      ),
+                    child: InkWell(
+                  onLongPress: () => print('change profile'),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: CircleAvatar(
+                      backgroundImage: (snapshot['photo'] != null)
+                          ? NetworkImage("${snapshot['photo']}")
+                          : AssetImage('assets/DefaultGuy.png'),
+                      minRadius: 50,
+                      maxRadius: 100,
                     ),
-                  )
-                ),
+                  ),
+                )),
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: 15, right: 15),
@@ -98,9 +83,28 @@ class MyProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  child: Text("Choose Time"),
-                  onPressed: () => _chooseTime(context),
+                Calendar(
+                  isExpandable: true,
+                  onDateSelected: (dateTime) {
+                    showDialog<Session>(
+                      context: context,
+                      builder: (BuildContext ctx) {
+                        return SimpleDialog(
+                          title: const Text('Select assignment'),
+                          children: <Widget>[
+                            TimePickerItem(onDone: (Session session) {
+                              Navigator.pop(ctx, session);
+                            }
+                            )
+                          ]
+                        );
+                      }
+                    ).then((Session s) {
+                      print('${s.startTime} ${s.cost}');
+                    });
+                    
+                  },
+
                 ),
                 RaisedButton(
                   child: Text("Sign Out"),
