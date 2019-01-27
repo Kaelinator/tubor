@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TutorProfilePage extends StatelessWidget {
+class MyProfilePage extends StatelessWidget {
+
   final DocumentSnapshot snapshot;
-  TutorProfilePage({this.snapshot});
+  MyProfilePage({this.snapshot});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class TutorProfilePage extends StatelessWidget {
         color: Colors.greenAccent,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('${snapshot['name']}\'s Profile'),
+              title: Text('My Profile'),
             ),
             backgroundColor: Colors.blueGrey,
             body: Column(
@@ -22,7 +23,7 @@ class TutorProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage:  NetworkImage("https://i.imgur.com/BoN9kdC.png"),
+                        backgroundImage: AssetImage('assets/DefaultGuy.png'),
                         minRadius: 50,
                         maxRadius: 100,
                       ),
