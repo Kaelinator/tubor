@@ -9,7 +9,11 @@ class MyProfilePage extends StatelessWidget {
   MyProfilePage({this.snapshot});
 
   void _logout(BuildContext context) {
-    FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance
+      .signOut()
+      .then((void x) {
+        Navigator.pop(context);
+      });
   }
 
   void _chooseTime(BuildContext context) {
