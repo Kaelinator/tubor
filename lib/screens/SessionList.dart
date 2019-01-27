@@ -10,9 +10,8 @@ class SessionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Query ref = Firestore.instance
-      .collection('events')
-      .where('event.start', isGreaterThanOrEqualTo: DateTime.now());
+    CollectionReference ref = Firestore.instance
+      .collection('events');
 
     Stream<QuerySnapshot> stream = (subjectId == null)
       ? ref.snapshots()

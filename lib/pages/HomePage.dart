@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
               child: CircleAvatar(
                 backgroundImage: 
-                (snapshot != null && snapshot['photo'] != null)
+                (snapshot != null && snapshot.exists && snapshot['photo'] != null)
                   ? NetworkImage("${snapshot['photo']}")
                   : AssetImage('assets/DefaultGuy.png'),
                 minRadius: 10,

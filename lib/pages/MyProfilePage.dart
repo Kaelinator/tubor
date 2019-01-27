@@ -104,11 +104,10 @@ class MyProfilePage extends StatelessWidget {
                         .collection('events')
                         .document()
                         .setData({
-                          'start': s.startTimeDT,
-                          'end': s.endTimeDT,
+                          'start': s.startTime.format(context),
+                          'end': s.endTime.format(context),
                           'cost': s.cost,
                           'size': 1,
-                          'day' : dateTime,
                           'subject': s.subject,
                           'enrolledStudents': [],
                           'tutorId': snapshot.documentID,
